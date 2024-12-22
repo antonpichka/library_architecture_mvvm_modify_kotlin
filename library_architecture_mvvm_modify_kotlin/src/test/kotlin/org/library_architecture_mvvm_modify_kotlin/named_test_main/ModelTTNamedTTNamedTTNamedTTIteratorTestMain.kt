@@ -18,33 +18,34 @@ open class UserBalance(val username: String, val money: Int) : BaseModel(usernam
     }
 }
 
-open class ListUserBalance(listModel: MutableList<BaseModel>) : BaseListModel(listModel) {
-    override fun clone(): ListUserBalance {
-        val newListModel = mutableListOf<BaseModel>()
-        for(itemModel: UserBalance in listModel<UserBalance>()) {
-            newListModel.add(itemModel.clone())
+open class ListUserBalance<T : UserBalance>(listModel: MutableList<T>) : BaseListModel<T>(listModel) {
+    @Suppress("UNCHECKED_CAST")
+    override fun clone(): ListUserBalance<T> {
+        val newListModel = mutableListOf<T>()
+        for(itemModel: T in listModel) {
+            newListModel.add(itemModel.clone() as T)
         }
         return ListUserBalance(newListModel)
     }
 
     override fun toString(): String {
         var strListModel = "\n"
-        for(itemModel: UserBalance in listModel<UserBalance>()) {
+        for(itemModel: T in listModel) {
             strListModel += "$itemModel,\n"
         }
         return "ListUserBalance(listModel: [$strListModel])"
     }
 }
 
-class UserBalanceTTOrderByDescTTMoneyTTIterator : BaseModelTTNamedTTNamedTTNamedTTIterator() {
-    override fun currentModelWIndex(): CurrentModelWIndex {
-        var clone = listModelIterator<UserBalance>()[0].clone()
-        if(listModelIterator<UserBalance>().size <= 1) {
+class UserBalanceTTOrderByDescTTMoneyTTIterator : BaseModelTTNamedTTNamedTTNamedTTIterator<UserBalance>() {
+    override fun currentModelWIndex(): CurrentModelWIndex<UserBalance> {
+        var clone = listModelIterator[0].clone()
+        if(listModelIterator.size <= 1) {
             return CurrentModelWIndex(clone,0)
         }
         var indexRemove = 0
-        for(i in 1 until listModelIterator<UserBalance>().size) {
-            val itemModelIterator = listModelIterator<UserBalance>()[i]
+        for(i in 1 until listModelIterator.size) {
+            val itemModelIterator = listModelIterator[i]
             if(itemModelIterator.money > clone.money) {
                 clone = itemModelIterator.clone()
                 indexRemove = i

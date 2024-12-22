@@ -1,16 +1,11 @@
 package org.library_architecture_mvvm_modify_kotlin.base_model
 
-abstract class BaseListModel protected constructor(private val listModel: MutableList<BaseModel>) {
-    abstract fun clone(): BaseListModel
+abstract class BaseListModel<T : BaseModel> protected constructor(val listModel: MutableList<T>) {
+    abstract fun clone(): BaseListModel<T>
 
     abstract override fun toString(): String
 
-    @Suppress("UNCHECKED_CAST")
-    fun<T : BaseModel> listModel(): MutableList<T> {
-        return listModel as MutableList<T>
-    }
-
-    fun sortingFromModelTTNamedTTNamedTTNamedTTIteratorParameterListModel(modelTTNamedTTNamedTTNamedTTIterator: BaseModelTTNamedTTNamedTTNamedTTIterator) {
+    fun sortingFromModelTTNamedTTNamedTTNamedTTIteratorParameterListModel(modelTTNamedTTNamedTTNamedTTIterator: BaseModelTTNamedTTNamedTTNamedTTIterator<T>) {
         val sortedListModelFromListModelParameterListModelIterator = modelTTNamedTTNamedTTNamedTTIterator.getSortedListModelFromListModelParameterListModelIterator(listModel)
         listModel
             .takeIf { it.isNotEmpty() }
@@ -20,11 +15,11 @@ abstract class BaseListModel protected constructor(private val listModel: Mutabl
             .let { listModel.addAll(sortedListModelFromListModelParameterListModelIterator) }
     }
 
-    fun insertFromNewModelParameterListModel(newModel: BaseModel) {
+    fun insertFromNewModelParameterListModel(newModel: T) {
         listModel.add(newModel)
     }
 
-    fun updateFromNewModelParameterListModel(newModel: BaseModel) {
+    fun updateFromNewModelParameterListModel(newModel: T) {
         val indexOfFirst = listModel.indexOfFirst { it.uniqueId == newModel.uniqueId }
         if(indexOfFirst == -1) {
             return
@@ -40,12 +35,12 @@ abstract class BaseListModel protected constructor(private val listModel: Mutabl
         listModel.removeAt(indexOfFirst)
     }
 
-    fun insertListFromNewListModelParameterListModel(newListModel: List<BaseModel>) {
+    fun insertListFromNewListModelParameterListModel(newListModel: List<T>) {
         listModel.addAll(newListModel)
     }
 
-    fun updateListFromNewListModelParameterListModel(newListModel: List<BaseModel>) {
-        for(newItemModel: BaseModel in newListModel) {
+    fun updateListFromNewListModelParameterListModel(newListModel: List<T>) {
+        for(newItemModel: T in newListModel) {
             val indexOfFirst = listModel.indexOfFirst { it.uniqueId == newItemModel.uniqueId }
             if(indexOfFirst == -1) {
                 continue
@@ -54,8 +49,8 @@ abstract class BaseListModel protected constructor(private val listModel: Mutabl
         }
     }
 
-    fun deleteListFromNewListModelParameterListModel(newListModel: List<BaseModel>) {
-        for(newItemModel: BaseModel in newListModel) {
+    fun deleteListFromNewListModelParameterListModel(newListModel: List<T>) {
+        for(newItemModel: T in newListModel) {
             val indexOfFirst = listModel.indexOfFirst { it.uniqueId == newItemModel.uniqueId }
             if(indexOfFirst == -1) {
                 continue
