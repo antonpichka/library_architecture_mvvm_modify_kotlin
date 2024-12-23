@@ -6,15 +6,17 @@ plugins {
 
 group = "org.example"
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_1_8)
+tasks {
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
+        }
     }
-}
 
-tasks.withType<JavaCompile>{
-    sourceCompatibility = "1.8"
-    targetCompatibility = "1.8"
+    withType<JavaCompile> {
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
+    }
 }
 
 repositories {
@@ -22,7 +24,8 @@ repositories {
 }
 
 dependencies {
-    implementation(files("../build/libs/library_architecture_mvvm_modify_kotlin-1.0.jar"))
+    implementation(kotlin("stdlib"))
+    implementation(files("../build/libs/library_architecture_mvvm_modify_kotlin-1.0.0.jar"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("io.ktor:ktor-client-core:3.0.2")
     implementation("io.ktor:ktor-client-cio:3.0.2")
