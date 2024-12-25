@@ -5,7 +5,7 @@ plugins {
   `maven-publish`
 }
 
-group = "org.lamm"
+group = "io.github.antonpichka"
 version = "1.0.0"
 
 tasks {
@@ -41,13 +41,26 @@ publishing {
   publications {
     create<MavenPublication>("mavenJava") {
       pom {
-        name = "lamm"
+        name = "io.github.antonpichka:lamm"
         description = "MVVM Modify for Kotlin but you can also port to another language"
         url = "https://github.com/antonpichka/library_architecture_mvvm_modify_kotlin"
         licenses {
           license {
             name = "The MIT License (MIT)"
             url = "https://mit-license.org/"
+          }
+        }
+        scm {
+          connection = "scm:git:git://github.com:antonpichka/library_architecture_mvvm_modify_kotlin.git"
+          developerConnection = "scm:git:ssh://github.com:antonpichka/library_architecture_mvvm_modify_kotlin.git"
+          url = "https://github.com/antonpichka/library_architecture_mvvm_modify_kotlin"
+        }
+        developers {
+          developer {
+            name = "Anton Pichka"
+            email = "antonpichka@gmail.com"
+            organization = "Github"
+            organizationUrl = "https://github.com/antonpichka"
           }
         }
       }
