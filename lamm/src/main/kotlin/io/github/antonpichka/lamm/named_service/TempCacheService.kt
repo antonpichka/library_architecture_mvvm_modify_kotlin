@@ -22,7 +22,7 @@ class TempCacheService private constructor() {
     fun dispose(listKeyTempCache: List<String>, iteration: Int) {
         for(itemKeyTempCache: String in listKeyTempCache) {
            if(!tempCacheWStreams.containsKey(itemKeyTempCache)) {
-               return
+               continue
            }
            tempCacheWStreams[itemKeyTempCache]?.remove(iteration)
         }
