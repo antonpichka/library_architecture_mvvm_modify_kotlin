@@ -49,9 +49,9 @@ abstract class BaseListModel<T : BaseModel> protected constructor(val listModel:
         }
     }
 
-    fun deleteListFromNewListModelParameterListModel(newListModel: List<T>) {
-        for(newItemModel: T in newListModel) {
-            val indexOfFirst = listModel.indexOfFirst { it.uniqueId == newItemModel.uniqueId }
+    fun deleteListFromListUniqueIdByModelParameterListModel(listUniqueIdByModel: List<String>) {
+        for(itemUniqueIdByModel: String in listUniqueIdByModel) {
+            val indexOfFirst = listModel.indexOfFirst { it.uniqueId == itemUniqueIdByModel }
             if(indexOfFirst == -1) {
                 continue
             }
