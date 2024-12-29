@@ -57,13 +57,13 @@ class ListModelWrapperTestMain {
         val listIPAddressWrapper =
             ListIPAddressWrapper(
                 listOf(
-                    listOf("124.suka"),
-                    listOf("124.pidar"),
-                    listOf("124.zakompleksovanie"),
-                    listOf("124.5_rubley_v_karmane_net_na_rabotu_pizduyte"),
-                    listOf("124.hah_musor"),
-                    listOf("124.ez viebal"),
-                    listOf("124.sosat+lejat")
+                    listOf("1.1.1.1"),
+                    listOf("2.2.2.2"),
+                    listOf("3.3.3.3"),
+                    listOf("4.4.4.4"),
+                    listOf("5.5.5.5"),
+                    listOf("6.6.6.6"),
+                    listOf("7.7.7.7")
                 )
             )
         val listIPAddress: ListIPAddress<IPAddress> = listIPAddressWrapper.createListModel()
