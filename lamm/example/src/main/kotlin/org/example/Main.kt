@@ -104,7 +104,8 @@ open class ListIPAddressWrapper(listsListObject: List<List<Any>>) : BaseListMode
     override fun <T : BaseModel, Y : BaseListModel<T>> createListModel(): Y {
         val listModel = mutableListOf<IPAddress>()
         for(itemListObject: List<Any> in listsListObject) {
-            listModel.add(IPAddress(itemListObject[0] as String))
+            val iPAddressWrapper = IPAddressWrapper(itemListObject)
+            listModel.add(iPAddressWrapper.createModel())
         }
         return ListIPAddress(listModel) as Y
     }
