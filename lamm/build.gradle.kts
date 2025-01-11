@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.antonpichka"
-version = "1.0.1"
+version = "1.0.2"
 
 tasks {
   withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
