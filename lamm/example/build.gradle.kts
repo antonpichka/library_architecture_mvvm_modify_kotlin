@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation(files("../build/libs/lamm-1.0.1.jar"))
+    implementation(files("../build/libs/lamm-1.0.2.jar"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.3")
     implementation("io.ktor:ktor-client-core:3.0.2")
