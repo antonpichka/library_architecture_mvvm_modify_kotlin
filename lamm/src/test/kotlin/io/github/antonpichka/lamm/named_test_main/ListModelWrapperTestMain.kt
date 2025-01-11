@@ -5,6 +5,7 @@ import org.junit.Test
 import io.github.antonpichka.lamm.base_model.BaseListModel
 import io.github.antonpichka.lamm.base_model.BaseListModelWrapper
 import io.github.antonpichka.lamm.base_model.BaseModel
+import io.github.antonpichka.lamm.base_model.BaseModelWrapper
 
 open class IPAddress(val ip: String) : BaseModel(ip) {
     override fun clone(): IPAddress {
@@ -35,18 +36,20 @@ open class ListIPAddress<T : IPAddress>(listModel: MutableList<T>) : BaseListMod
     }
 }
 
+open class IPAddressWrapper(listObject: List<Any>) : BaseModelWrapper(listObject) {
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : BaseModel> createModel(): T {
+        return IPAddress(listObject[0] as String) as T
+    }
+}
+
 open class ListIPAddressWrapper(listsListObject: List<List<Any>>) : BaseListModelWrapper(listsListObject) {
     @Suppress("UNCHECKED_CAST")
     override fun <T : BaseModel, Y : BaseListModel<T>> createListModel(): Y {
         val listModel = mutableListOf<IPAddress>()
         for(itemListObject: List<Any> in listsListObject) {
-            for(itemObject: Any in itemListObject) {
-                listModel.add(
-                    IPAddress(
-                        itemObject as String
-                    )
-                )
-            }
+            val iPAddressWrapper = IPAddressWrapper(itemListObject)
+            listModel.add(iPAddressWrapper.createModel())
         }
         return ListIPAddress(listModel) as Y
     }
